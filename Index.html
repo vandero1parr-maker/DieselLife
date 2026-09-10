@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diesel Life</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+}
+
+header {
+    background: #1b1b1b;
+    padding: 18px;
+    text-align: center;
+    border-bottom: 2px solid #444;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.money {
+    margin-top: 8px;
+    color: #6cff6c;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.truck {
+    background: linear-gradient(#292929, #111);
+    border: 2px solid #555;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.truck-art {
+    font-size: 90px;
+    margin: 20px 0;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.stat {
+    background: #222;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+button {
+    background: #333;
+    color: white;
+    border: 1px solid #666;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:active {
+    transform: scale(.97);
+}
+
+.upgrades {
+    margin-top: 20px;
+}
+
+.upgrade {
+    background: #222;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.upgrade button {
+    float: right;
+    padding: 8px 12px;
+}
+
+.log {
+    margin-top: 20px;
+    background: #080808;
+    padding: 15px;
+    border-radius: 10px;
+    min-height: 100px;
+    color: #ccc;
+}
+
+@media(max-width:600px) {
+    .truck-art {
+        font-size: 65px;
+    }
+
+    .menu {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>DIESEL LIFE</h1>
+    <div class="money">Cash: $<span id="money">25000</span></div>
+</header>
+
+<div class="container">
+
+    <div class="truck">
+        <h2 id="truckName">IronHorse 2500</h2>
+
+        <div class="truck-art">
+            🛻
+        </div>
+
+        <div class="stats">
+            <div class="stat">Horsepower<br><b id="hp">325</b> HP</div>
+            <div class="stat">Torque<br><b id="torque">650</b> lb-ft</div>
+            <div class="stat">Weight<br><b id="weight">7,200</b> lbs</div>
+            <div class="stat">0-60<br><b id="zero60">7.2</b> sec</div>
+        </div>
+    </div>
+
+    <div class="menu">
+        <button onclick="race()">🏁 Drag Race</button>
+        <button onclick="pull()">🚜 Truck Pull</button>
+        <button onclick="show()">🏆 Truck Show</button>
+        <button onclick="garage()">🔧 Garage</button>
+    </div>
+
+    <div id="garage" class="upgrades" style="display:none">
+
+        <h2>Garage</h2>
+
+        <div class="upgrade">
+            <b>Performance Tune</b><br>
+            +35 HP / +70 Torque
+            <button onclick="upgrade('tune')">$1,500</button>
+        </div>
+
+        <div class="upgrade">
+            <b>Turbo Upgrade</b><br>
+            +75 HP / +120 Torque
+            <button onclick="upgrade('turbo')">$3,500</button>
+        </div>
+
+        <div class="upgrade">
+            <b>Fuel System</b><br>
+            +60 HP / +100 Torque
+            <button onclick="upgrade('fuel')">$2,800</button>
+        </div>
+
+        <div class="upgrade">
+            <b>Built Transmission</b><br>
+            Better launches
+            <button onclick="upgrade('trans')">$4,000</button>
+        </div>
+
+        <div class="upgrade">
+            <b>Drag Tires</b><br>
+            Better traction
+            <button onclick="upgrade('tires')">$1,800</button>
+        </div>
+
+    </div>
+
+    <div id="log" class="log">
+        Welcome to Diesel Life.<br>
+        Buy parts, build your truck, and start competing.
+    </div>
+
+</div>
+
+<script>
+
+let money = 25000;
+
+let truck = {
+    hp: 325,
+    torque: 650,
+    weight: 7200,
+    zero60: 7.2,
+    transmission: false,
+    tires: false
+};
+
+function update() {
+
+    document.getElementById("money").textContent =
+        money.toLocaleString();
+
+    document.getElementById("hp").textContent =
+        Math.round(truck.hp);
+
+    document.getElementById("torque").textContent =
+        Math.round(truck.torque);
+
+    document.getElementById("weight").textContent =
+        truck.weight.toLocaleString();
+
+    document.getElementById("zero60").textContent =
+        truck.zero60.toFixed(2);
+}
+
+function log(message) {
+    document.getElementById("log").innerHTML = message;
+}
+
+function garage() {
+
+    let g = document.getElementById("garage");
+
+    if (g.style.display === "none") {
+        g.style.display = "block";
+    } else {
+        g.style.display = "none";
+    }
+}
+
+function upgrade(type) {
+
+    let cost = 0;
+
+    if (type === "tune") {
+        cost = 1500;
+
+        if (money >= cost) {
+            money -= cost;
+            truck.hp += 35;
+            truck.torque += 70;
+            truck.zero60 -= .35;
+            log("Performance tune installed.");
+        }
+    }
+
+    if (type === "turbo") {
+        cost = 3500;
+
+        if (money >= cost) {
+            money -= cost;
+            truck.hp += 75;
+            truck.torque += 120;
+            truck.zero60 -= .65;
+            log("Larger turbo installed.");
+        }
+    }
+
+    if (type === "fuel") {
+        cost = 2800;
+
+        if (money >= cost) {
+            money -= cost;
+            truck.hp += 60;
+            truck.torque += 100;
+            truck.zero60 -= .45;
+            log("Upgraded fuel system installed.");
+        }
+    }
+
+    if (type === "trans") {
+
+        cost = 4000;
+
+        if (!truck.transmission && money >= cost) {
+            money -= cost;
+            truck.transmission = true;
+            truck.zero60 -= .7;
+            log("Built transmission installed.");
+        }
+    }
+
+    if (type === "tires") {
+
+        cost = 1800;
+
+        if (!truck.tires && money >= cost) {
+            money -= cost;
+            truck.tires = true;
+            truck.zero60 -= .5;
+            log("Drag tires installed. Traction improved.");
+        }
+    }
+
+    update();
+}
+
+function race() {
+
+    let performance =
+        truck.hp +
+        truck.torque / 3 -
+        truck.weight / 30;
+
+    let chance =
+        performance / 500;
+
+    let roll = Math.random();
+
+    if (roll < chance) {
+
+        let winnings = 1500 + Math.floor(Math.random() * 2500);
+
+        money += winnings;
+
+        log(
+            "🏁 YOU WON THE DRAG RACE!<br><br>" +
+            "Prize: +$" + winnings.toLocaleString()
+        );
+
+    } else {
+
+        log(
+            "🏁 You lost the drag race.<br><br>" +
+            "Build the truck and try again."
+        );
+    }
+
+    update();
+}
+
+function pull() {
+
+    let performance =
+        truck.torque * 0.7 +
+        truck.hp * 0.3;
+
+    let winnings =
+        Math.floor(performance * 2);
+
+    money += winnings;
+
+    log(
+        "🚜 Truck Pull Result<br><br>" +
+        "Distance: " +
+        Math.floor(180 + performance / 15) +
+        " ft<br><br>" +
+        "Prize: +$" +
+        winnings.toLocaleString()
+    );
+
+    update();
+}
+
+function show() {
+
+    let score =
+        Math.floor(
+            50 +
+            Math.random() * 50
+        );
+
+    let winnings = score * 25;
+
+    money += winnings;
+
+    log(
+        "🏆 TRUCK SHOW<br><br>" +
+        "Judging Score: " +
+        score +
+        "/100<br><br>" +
+        "Prize: +$" +
+        winnings.toLocaleString()
+    );
+
+    update();
+}
+
+update();
+
+</script>
+
+</body>
+</html>
