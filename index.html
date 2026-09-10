@@ -6,384 +6,434 @@
 <title>Diesel Life</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #0d0d0d;
-  color: white;
-  min-height: 100vh;
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#080808;
+  color:white;
+  min-height:100vh;
 }
 
-header {
-  background: #171717;
-  border-bottom: 2px solid #333;
-  padding: 18px;
-  position: sticky;
-  top: 0;
-  z-index: 50;
+header{
+  background:#151515;
+  padding:15px;
+  border-bottom:2px solid #333;
+  position:sticky;
+  top:0;
+  z-index:50;
 }
 
-.title {
-  text-align: center;
-  font-size: 34px;
-  font-weight: 900;
-  letter-spacing: 2px;
+.logo{
+  text-align:center;
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:3px;
 }
 
-.money {
-  text-align: center;
-  color: #7cff64;
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 8px;
+.money{
+  text-align:center;
+  color:#75ff61;
+  font-size:21px;
+  font-weight:bold;
+  margin-top:7px;
 }
 
-.statsbar {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 6px;
-  margin-top: 12px;
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:13px;
 }
 
-.stat {
-  background: #252525;
-  padding: 8px;
-  text-align: center;
-  border-radius: 8px;
-  font-size: 13px;
+.stat{
+  background:#242424;
+  border-radius:10px;
+  text-align:center;
+  padding:10px 4px;
+  font-size:13px;
+  color:#ccc;
 }
 
-.stat strong {
-  display: block;
-  font-size: 16px;
-  margin-top: 3px;
+.stat strong{
+  display:block;
+  color:white;
+  font-size:19px;
+  margin-top:4px;
 }
 
-nav {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  background: #161616;
-  border-bottom: 1px solid #333;
-  position: sticky;
-  top: 136px;
-  z-index: 40;
+nav{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:#121212;
+  border-bottom:1px solid #333;
+  position:sticky;
+  top:137px;
+  z-index:40;
 }
 
-nav button {
-  border: none;
-  background: #161616;
-  color: white;
-  padding: 14px 4px;
-  font-weight: bold;
+nav button{
+  padding:15px 3px;
+  background:#121212;
+  color:#ddd;
+  border:none;
+  font-weight:bold;
+  font-size:14px;
 }
 
-nav button.active {
-  background: #303030;
-  border-bottom: 3px solid #7cff64;
+nav button.active{
+  background:#2c2c2c;
+  color:white;
+  border-bottom:4px solid #75ff61;
 }
 
-.screen {
-  display: none;
-  padding: 16px;
+.screen{
+  display:none;
+  padding:14px;
 }
 
-.screen.active {
-  display: block;
+.screen.active{
+  display:block;
 }
 
-.section-title {
-  font-size: 23px;
-  font-weight: bold;
-  margin-bottom: 14px;
+.truck-title{
+  text-align:center;
+  font-size:25px;
+  font-weight:900;
+  margin:5px 0 12px;
+}
+
+.truck-subtitle{
+  text-align:center;
+  color:#888;
+  margin-top:-7px;
+  margin-bottom:12px;
+  font-size:13px;
 }
 
 /* GARAGE */
 
-.garage-scene {
-  background: linear-gradient(#242424 0%, #151515 70%, #090909 70%);
-  min-height: 330px;
-  border: 2px solid #444;
-  border-radius: 18px;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 18px;
+.garage{
+  height:370px;
+  border:2px solid #444;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  background:
+    linear-gradient(
+      to bottom,
+      #232323 0%,
+      #181818 65%,
+      #090909 65%,
+      #090909 100%
+    );
 }
 
-.garage-wall {
-  position: absolute;
-  width: 100%;
-  top: 20px;
-  text-align: center;
-  color: #555;
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: 5px;
+.shop-sign{
+  position:absolute;
+  top:26px;
+  width:100%;
+  text-align:center;
+  color:#3f3f3f;
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:7px;
 }
 
-.floor-line {
-  position: absolute;
-  bottom: 77px;
-  width: 100%;
-  height: 2px;
-  background: #444;
+.light{
+  position:absolute;
+  width:90px;
+  height:8px;
+  top:15px;
+  background:#ddd;
+  box-shadow:0 0 30px rgba(255,255,255,.25);
 }
 
-/* TRUCK */
-
-.truck {
-  position: absolute;
-  width: 330px;
-  height: 150px;
-  left: 50%;
-  bottom: 65px;
-  transform: translateX(-50%);
-  transition: all .3s;
+.light.one{
+  left:15%;
 }
 
-.truck-body {
-  position: absolute;
-  left: 25px;
-  bottom: 35px;
-  width: 280px;
-  height: 67px;
-  background: #737373;
-  border-radius: 7px 12px 8px 8px;
-  border: 3px solid rgba(255,255,255,.15);
-  transition: background .3s;
+.light.two{
+  right:15%;
 }
 
-.bed-top {
-  position: absolute;
-  left: 28px;
-  bottom: 100px;
-  width: 110px;
-  height: 8px;
-  background: #444;
+.floor{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:130px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #080808,
+      #080808 65px,
+      #101010 66px
+    );
 }
 
-.cab {
-  position: absolute;
-  right: 45px;
-  bottom: 98px;
-  width: 113px;
-  height: 62px;
-  background: #737373;
-  clip-path: polygon(15% 100%, 25% 10%, 75% 0, 100% 100%);
-  border-radius: 8px;
-  transition: background .3s;
+.floor-line{
+  position:absolute;
+  bottom:128px;
+  width:100%;
+  height:3px;
+  background:#494949;
 }
 
-.window {
-  position: absolute;
-  right: 63px;
-  bottom: 109px;
-  width: 75px;
-  height: 40px;
-  background: #8ec4d8;
-  clip-path: polygon(13% 100%, 23% 15%, 75% 8%, 96% 100%);
+/* SVG TRUCK */
+
+.truck-wrap{
+  position:absolute;
+  left:50%;
+  bottom:50px;
+  transform:translateX(-50%);
+  width:96%;
+  max-width:700px;
+  transition:.35s ease;
 }
 
-.grille {
-  position: absolute;
-  right: 18px;
-  bottom: 49px;
-  width: 26px;
-  height: 42px;
-  background: repeating-linear-gradient(
-    90deg,
-    #bbb 0px,
-    #bbb 3px,
-    #555 3px,
-    #555 6px
-  );
-  border-radius: 3px;
+.truck-svg{
+  width:100%;
+  overflow:visible;
 }
 
-.bumper {
-  position: absolute;
-  right: 5px;
-  bottom: 34px;
-  width: 55px;
-  height: 12px;
-  background: #aaa;
-  border-radius: 4px;
+.body-color{
+  fill:#3b3b3b;
+  transition:fill .3s;
 }
 
-.exhaust {
-  position: absolute;
-  left: 25px;
-  bottom: 39px;
-  width: 42px;
-  height: 8px;
-  background: #aaa;
-  transition: all .3s;
+.body-shadow{
+  fill:#222;
 }
 
-.wheel {
-  position: absolute;
-  bottom: 7px;
-  width: 67px;
-  height: 67px;
-  border-radius: 50%;
-  background: #111;
-  border: 7px solid #1b1b1b;
+.window{
+  fill:#77a9ba;
 }
 
-.wheel.front {
-  right: 47px;
+.window-dark{
+  fill:#1d3038;
 }
 
-.wheel.rear {
-  left: 54px;
+.trim{
+  fill:#111;
 }
 
-.rim {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle,#222 0 17%,#aaa 18% 37%,#444 38% 53%,#aaa 54% 66%,#333 67%);
-  transition: all .3s;
+.chrome{
+  fill:#a7a7a7;
 }
 
-.truck-name {
-  text-align: center;
-  font-size: 20px;
-  margin-bottom: 10px;
-  font-weight: bold;
+.headlight{
+  fill:#dcecff;
 }
 
-.category-tabs {
-  display: flex;
-  overflow-x: auto;
-  gap: 8px;
-  padding-bottom: 10px;
+.taillight{
+  fill:#b72525;
 }
 
-.category-tabs button {
-  background: #252525;
-  color: white;
-  border: 1px solid #444;
-  padding: 10px 15px;
-  border-radius: 25px;
-  white-space: nowrap;
+.tire{
+  fill:#0b0b0b;
+  stroke:#202020;
+  stroke-width:8;
+  transition:r .35s;
 }
 
-.category-tabs button.active {
-  background: #555;
-  border-color: #7cff64;
+.rim{
+  fill:#888;
+  stroke:#d1d1d1;
+  stroke-width:6;
 }
 
-.parts {
-  display: grid;
-  gap: 10px;
+.rim-inner{
+  fill:#222;
 }
 
-.part {
-  background: #1b1b1b;
-  border: 1px solid #3c3c3c;
-  border-radius: 13px;
-  padding: 14px;
+.axle{
+  stroke:#333;
+  stroke-width:8;
 }
 
-.part-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
+.exhaust{
+  fill:#999;
 }
 
-.part-name {
-  font-weight: bold;
-  font-size: 17px;
+/* SHOP */
+
+.category-scroll{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:15px 0 12px;
+  scrollbar-width:none;
 }
 
-.part-price {
-  color: #7cff64;
-  font-weight: bold;
+.category-scroll::-webkit-scrollbar{
+  display:none;
 }
 
-.part-description {
-  color: #aaa;
-  margin-top: 6px;
-  font-size: 14px;
+.category{
+  white-space:nowrap;
+  background:#242424;
+  color:white;
+  border:1px solid #444;
+  border-radius:25px;
+  padding:11px 18px;
+  font-size:15px;
 }
 
-.part button {
-  width: 100%;
-  margin-top: 11px;
-  padding: 11px;
-  background: #333;
-  color: white;
-  border: 1px solid #555;
-  border-radius: 8px;
-  font-weight: bold;
+.category.active{
+  border-color:#75ff61;
+  background:#343434;
 }
 
-.part button.owned {
-  background: #20491c;
-  border-color: #7cff64;
+.parts{
+  display:grid;
+  gap:11px;
 }
 
-/* RACING */
-
-.race-card {
-  background: #1b1b1b;
-  border: 1px solid #444;
-  border-radius: 16px;
-  padding: 18px;
-  margin-bottom: 14px;
+.part{
+  background:#191919;
+  border:1px solid #3c3c3c;
+  border-radius:16px;
+  padding:15px;
 }
 
-.race-card h2 {
-  margin-bottom: 10px;
+.part-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
 }
 
-.race-info {
-  color: #aaa;
-  line-height: 1.5;
+.part-name{
+  font-size:18px;
+  font-weight:800;
 }
 
-.big-button {
-  width: 100%;
-  padding: 17px;
-  border: none;
-  border-radius: 12px;
-  background: #393939;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 12px;
+.part-price{
+  color:#75ff61;
+  font-size:17px;
+  font-weight:800;
 }
 
-.green {
-  background: #276321;
+.part-desc{
+  color:#999;
+  margin-top:7px;
+  font-size:14px;
+  line-height:1.4;
 }
 
-.result {
-  margin-top: 15px;
-  padding: 15px;
-  border-radius: 10px;
-  display: none;
-  text-align: center;
-  font-weight: bold;
+.part button{
+  width:100%;
+  padding:12px;
+  border-radius:9px;
+  border:1px solid #555;
+  background:#303030;
+  color:white;
+  margin-top:12px;
+  font-weight:800;
 }
 
-.show-card {
-  background: #1d1d1d;
-  border: 1px solid #444;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 15px;
+.part button.installed{
+  background:#1d501a;
+  border-color:#75ff61;
 }
 
-.reset {
-  color: #ff7272;
-  border-color: #ff7272 !important;
-  margin-top: 40px !important;
+.section-title{
+  font-size:25px;
+  font-weight:900;
+  margin:8px 0 15px;
+}
+
+.card{
+  background:#191919;
+  border:1px solid #444;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:14px;
+}
+
+.card h2{
+  margin-bottom:9px;
+}
+
+.muted{
+  color:#aaa;
+  line-height:1.55;
+}
+
+.big-btn{
+  width:100%;
+  border:1px solid #555;
+  color:white;
+  background:#343434;
+  border-radius:12px;
+  padding:16px;
+  font-size:17px;
+  font-weight:900;
+  margin-top:13px;
+}
+
+.big-btn.green{
+  background:#245f20;
+}
+
+.result{
+  display:none;
+  padding:16px;
+  margin-top:13px;
+  border-radius:11px;
+  text-align:center;
+  font-weight:bold;
+  line-height:1.5;
+}
+
+.build-sheet{
+  background:#171717;
+  border:1px solid #444;
+  border-radius:16px;
+  padding:17px;
+  margin-top:15px;
+}
+
+.build-row{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #292929;
+  padding:10px 0;
+  gap:15px;
+}
+
+.build-row:last-child{
+  border:none;
+}
+
+.build-row span:last-child{
+  text-align:right;
+  color:#bbb;
+}
+
+.reset{
+  color:#ff7171;
+  border-color:#8e3939;
+  margin-top:35px;
+}
+
+@media(max-width:500px){
+
+  .garage{
+    height:335px;
+  }
+
+  .truck-wrap{
+    width:105%;
+    bottom:52px;
+  }
+
+  .logo{
+    font-size:31px;
+  }
 }
 </style>
 </head>
@@ -391,413 +441,903 @@ nav button.active {
 <body>
 
 <header>
-  <div class="title">DIESEL LIFE</div>
-  <div class="money">Cash: $<span id="money">25000</span></div>
 
-  <div class="statsbar">
-    <div class="stat">
-      HP
-      <strong id="hp">325</strong>
-    </div>
+<div class="logo">
+DIESEL LIFE
+</div>
 
-    <div class="stat">
-      Torque
-      <strong id="torque">650</strong>
-    </div>
+<div class="money">
+Cash: $<span id="money">25,000</span>
+</div>
 
-    <div class="stat">
-      1/4 Mile
-      <strong id="quarter">16.2s</strong>
-    </div>
-  </div>
+<div class="stats">
+
+<div class="stat">
+HORSEPOWER
+<strong id="hp">325</strong>
+</div>
+
+<div class="stat">
+TORQUE
+<strong id="torque">650</strong>
+</div>
+
+<div class="stat">
+1/4 MILE
+<strong id="quarter">16.2s</strong>
+</div>
+
+</div>
+
 </header>
 
 <nav>
-  <button class="nav active" onclick="showScreen('garage',this)">🔧 Garage</button>
-  <button class="nav" onclick="showScreen('race',this)">🏁 Race</button>
-  <button class="nav" onclick="showScreen('pull',this)">🚜 Pull</button>
-  <button class="nav" onclick="showScreen('show',this)">🏆 Show</button>
+
+<button class="nav active"
+onclick="showScreen('garageScreen',this)">
+🔧 Garage
+</button>
+
+<button class="nav"
+onclick="showScreen('raceScreen',this)">
+🏁 Race
+</button>
+
+<button class="nav"
+onclick="showScreen('pullScreen',this)">
+🚜 Pull
+</button>
+
+<button class="nav"
+onclick="showScreen('showScreen',this)">
+🏆 Show
+</button>
+
 </nav>
 
 <!-- GARAGE -->
 
-<div id="garage" class="screen active">
+<section id="garageScreen" class="screen active">
 
-  <div class="truck-name">
-    IronHorse 2500
-  </div>
+<div class="truck-title">
+IronHorse F2500
+</div>
 
-  <div class="garage-scene">
+<div class="truck-subtitle">
+Heavy Duty Crew Cab Diesel
+</div>
 
-    <div class="garage-wall">
-      DIESEL LIFE
-    </div>
+<div class="garage">
 
-    <div class="floor-line"></div>
+<div class="light one"></div>
+<div class="light two"></div>
 
-    <div id="truck" class="truck">
+<div class="shop-sign">
+DIESEL LIFE
+</div>
 
-      <div class="truck-body" id="truckBody"></div>
-      <div class="bed-top"></div>
-      <div class="cab" id="cab"></div>
-      <div class="window"></div>
-      <div class="grille"></div>
-      <div class="bumper"></div>
-      <div class="exhaust" id="exhaust"></div>
+<div class="floor-line"></div>
+<div class="floor"></div>
 
-      <div class="wheel rear">
-        <div class="rim" id="rearRim"></div>
-      </div>
+<div id="truckWrap" class="truck-wrap">
 
-      <div class="wheel front">
-        <div class="rim" id="frontRim"></div>
-      </div>
+<svg class="truck-svg"
+viewBox="0 0 900 330">
 
-    </div>
-  </div>
+<!-- rear axle -->
+<line
+class="axle"
+x1="170"
+y1="260"
+x2="730"
+y2="260"
+/>
 
-  <div class="category-tabs">
+<!-- bed -->
+<path
+id="truckBed"
+class="body-color"
+d="
+M65 140
+L320 140
+L335 245
+L55 245
+L55 160
+Q55 140 65 140
+Z"
+/>
 
-    <button class="category active" onclick="showCategory('wheels',this)">
-      Wheels
-    </button>
+<!-- crew cab -->
+<path
+id="truckCab"
+class="body-color"
+d="
+M315 105
+L370 55
+L585 55
+L660 135
+L665 245
+L320 245
+Z"
+/>
 
-    <button class="category" onclick="showCategory('paint',this)">
-      Paint
-    </button>
+<!-- hood -->
+<path
+id="truckHood"
+class="body-color"
+d="
+M580 135
+L790 138
+Q830 140 835 170
+L835 245
+L650 245
+Z"
+/>
 
-    <button class="category" onclick="showCategory('suspension',this)">
-      Suspension
-    </button>
+<!-- lower body shadow -->
+<rect
+class="body-shadow"
+x="65"
+y="220"
+width="745"
+height="27"
+rx="5"
+/>
 
-    <button class="category" onclick="showCategory('turbo',this)">
-      Turbo
-    </button>
+<!-- bed top -->
+<rect
+class="trim"
+x="72"
+y="132"
+width="235"
+height="12"
+rx="3"
+/>
 
-    <button class="category" onclick="showCategory('engine',this)">
-      Engine
-    </button>
+<!-- front window -->
+<path
+class="window"
+d="
+M500 70
+L565 70
+L620 132
+L500 132
+Z"
+/>
 
-    <button class="category" onclick="showCategory('exhaust',this)">
-      Exhaust
-    </button>
+<!-- rear window -->
+<path
+class="window"
+d="
+M382 70
+L485 70
+L485 132
+L350 132
+Z"
+/>
 
-  </div>
+<!-- windshield dark edge -->
+<path
+class="window-dark"
+d="
+M565 70
+L585 70
+L640 132
+L620 132
+Z"
+/>
 
-  <div id="parts" class="parts"></div>
+<!-- door lines -->
+<line
+x1="490"
+y1="142"
+x2="490"
+y2="225"
+stroke="#111"
+stroke-width="4"
+/>
+
+<line
+x1="350"
+y1="142"
+x2="350"
+y2="225"
+stroke="#111"
+stroke-width="4"
+/>
+
+<!-- handles -->
+<rect
+class="trim"
+x="450"
+y="150"
+width="28"
+height="6"
+rx="3"
+/>
+
+<rect
+class="trim"
+x="325"
+y="150"
+width="25"
+height="6"
+rx="3"
+/>
+
+<!-- headlights -->
+<rect
+class="headlight"
+x="788"
+y="154"
+width="38"
+height="38"
+rx="7"
+/>
+
+<rect
+class="trim"
+x="792"
+y="165"
+width="30"
+height="7"
+/>
+
+<!-- grille -->
+<rect
+class="chrome"
+x="795"
+y="196"
+width="47"
+height="50"
+rx="5"
+/>
+
+<line
+x1="805"
+y1="200"
+x2="805"
+y2="242"
+stroke="#444"
+stroke-width="4"
+/>
+
+<line
+x1="817"
+y1="200"
+x2="817"
+y2="242"
+stroke="#444"
+stroke-width="4"
+/>
+
+<line
+x1="829"
+y1="200"
+x2="829"
+y2="242"
+stroke="#444"
+stroke-width="4"
+/>
+
+<!-- bumper -->
+<rect
+class="chrome"
+x="770"
+y="241"
+width="100"
+height="22"
+rx="7"
+/>
+
+<!-- rear bumper -->
+<rect
+class="chrome"
+x="35"
+y="238"
+width="90"
+height="20"
+rx="5"
+/>
+
+<!-- taillight -->
+<rect
+class="taillight"
+x="57"
+y="153"
+width="15"
+height="47"
+rx="4"
+/>
+
+<!-- exhaust -->
+<g id="exhaustGroup">
+
+<rect
+class="exhaust"
+x="90"
+y="235"
+width="85"
+height="10"
+rx="4"
+/>
+
+</g>
+
+<!-- tires -->
+
+<circle
+id="rearTire"
+class="tire"
+cx="205"
+cy="250"
+r="72"
+/>
+
+<circle
+id="rearRim"
+class="rim"
+cx="205"
+cy="250"
+r="39"
+/>
+
+<circle
+class="rim-inner"
+cx="205"
+cy="250"
+r="12"
+/>
+
+<circle
+id="frontTire"
+class="tire"
+cx="690"
+cy="250"
+r="72"
+/>
+
+<circle
+id="frontRim"
+class="rim"
+cx="690"
+cy="250"
+r="39"
+/>
+
+<circle
+class="rim-inner"
+cx="690"
+cy="250"
+r="12"
+/>
+
+</svg>
 
 </div>
 
-<!-- DRAG RACING -->
+</div>
 
-<div id="race" class="screen">
+<div class="category-scroll">
 
-  <div class="section-title">
-    🏁 Drag Strip
-  </div>
+<button
+class="category active"
+onclick="selectCategory('wheels',this)">
+Wheels
+</button>
 
-  <div class="race-card">
+<button
+class="category"
+onclick="selectCategory('tires',this)">
+Tires
+</button>
 
-    <h2>Street Diesel Shootout</h2>
+<button
+class="category"
+onclick="selectCategory('paint',this)">
+Paint
+</button>
 
-    <div class="race-info">
-      Opponent: 420 HP diesel truck<br>
-      Entry Fee: $500<br>
-      Winner Payout: $1,500
-    </div>
+<button
+class="category"
+onclick="selectCategory('suspension',this)">
+Suspension
+</button>
 
-    <button class="big-button green" onclick="race(420,500,1500)">
-      Race for $500
-    </button>
+<button
+class="category"
+onclick="selectCategory('turbo',this)">
+Turbo
+</button>
 
-  </div>
+<button
+class="category"
+onclick="selectCategory('engine',this)">
+Engine
+</button>
 
-  <div class="race-card">
-
-    <h2>Modified Diesel Class</h2>
-
-    <div class="race-info">
-      Opponent: 600 HP diesel truck<br>
-      Entry Fee: $1,000<br>
-      Winner Payout: $3,500
-    </div>
-
-    <button class="big-button" onclick="race(600,1000,3500)">
-      Race for $1,000
-    </button>
-
-  </div>
-
-  <div class="race-card">
-
-    <h2>Outlaw Diesel</h2>
-
-    <div class="race-info">
-      Opponent: 850 HP diesel truck<br>
-      Entry Fee: $2,500<br>
-      Winner Payout: $8,000
-    </div>
-
-    <button class="big-button" onclick="race(850,2500,8000)">
-      Race for $2,500
-    </button>
-
-  </div>
-
-  <div id="raceResult" class="result"></div>
+<button
+class="category"
+onclick="selectCategory('exhaust',this)">
+Exhaust
+</button>
 
 </div>
 
-<!-- TRUCK PULL -->
+<div id="parts" class="parts"></div>
 
-<div id="pull" class="screen">
+<div class="build-sheet">
 
-  <div class="section-title">
-    🚜 Truck Pull
-  </div>
+<div class="section-title">
+Build Sheet
+</div>
 
-  <div class="race-card">
+<div class="build-row">
+<span>Wheels</span>
+<span id="buildWheels"></span>
+</div>
 
-    <h2>County Fair Pull</h2>
+<div class="build-row">
+<span>Tires</span>
+<span id="buildTires"></span>
+</div>
 
-    <div class="race-info">
-      Torque matters more than horsepower here.<br><br>
-      Entry: $750<br>
-      Winner: $2,500
-    </div>
+<div class="build-row">
+<span>Suspension</span>
+<span id="buildSuspension"></span>
+</div>
 
-    <button class="big-button green" onclick="truckPull()">
-      Enter Pull
-    </button>
+<div class="build-row">
+<span>Turbo</span>
+<span id="buildTurbo"></span>
+</div>
 
-  </div>
+<div class="build-row">
+<span>Fueling</span>
+<span id="buildEngine"></span>
+</div>
 
-  <div id="pullResult" class="result"></div>
+<div class="build-row">
+<span>Exhaust</span>
+<span id="buildExhaust"></span>
+</div>
 
 </div>
 
-<!-- TRUCK SHOW -->
+</section>
 
-<div id="show" class="screen">
+<!-- RACE -->
 
-  <div class="section-title">
-    🏆 Truck Shows
-  </div>
+<section id="raceScreen" class="screen">
 
-  <div class="show-card">
+<div class="section-title">
+🏁 Diesel Drag Strip
+</div>
 
-    <h2>Local Diesel Meet</h2>
+<div class="card">
 
-    <p style="color:#aaa;margin-top:10px;line-height:1.5;">
-      Your truck is judged based on wheels, paint,
-      suspension and modifications.
-    </p>
+<h2>Street Diesel</h2>
 
-    <button class="big-button green" onclick="truckShow()">
-      Enter Show — $300
-    </button>
+<div class="muted">
+Opponent: approximately 425 HP<br>
+Entry: $500<br>
+Winner payout: $1,500
+</div>
 
-  </div>
-
-  <div id="showResult" class="result"></div>
-
-  <button class="big-button reset" onclick="resetGame()">
-    Reset Game
-  </button>
+<button
+class="big-btn green"
+onclick="dragRace(425,500,1500)">
+Enter Race
+</button>
 
 </div>
+
+<div class="card">
+
+<h2>Modified Diesel</h2>
+
+<div class="muted">
+Opponent: approximately 600 HP<br>
+Entry: $1,000<br>
+Winner payout: $3,500
+</div>
+
+<button
+class="big-btn"
+onclick="dragRace(600,1000,3500)">
+Enter Race
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Outlaw Diesel</h2>
+
+<div class="muted">
+Opponent: approximately 850 HP<br>
+Entry: $2,500<br>
+Winner payout: $8,000
+</div>
+
+<button
+class="big-btn"
+onclick="dragRace(850,2500,8000)">
+Enter Race
+</button>
+
+</div>
+
+<div
+id="raceResult"
+class="result">
+</div>
+
+</section>
+
+<!-- PULL -->
+
+<section id="pullScreen" class="screen">
+
+<div class="section-title">
+🚜 Truck Pull
+</div>
+
+<div class="card">
+
+<h2>County Fair Pull</h2>
+
+<div class="muted">
+Torque, tires and power determine how far your truck pulls the sled.<br><br>
+Entry: $750<br>
+Full Pull payout: $2,500
+</div>
+
+<button
+class="big-btn green"
+onclick="truckPull()">
+Hook to Sled
+</button>
+
+</div>
+
+<div
+id="pullResult"
+class="result">
+</div>
+
+</section>
+
+<!-- SHOW -->
+
+<section id="showScreen" class="screen">
+
+<div class="section-title">
+🏆 Diesel Truck Shows
+</div>
+
+<div class="card">
+
+<h2>Local Diesel Meet</h2>
+
+<div class="muted">
+Judging is based on your wheels, tires, suspension, paint and overall build.
+</div>
+
+<button
+class="big-btn green"
+onclick="truckShow()">
+Enter Show — $300
+</button>
+
+</div>
+
+<div
+id="showResult"
+class="result">
+</div>
+
+<button
+class="big-btn reset"
+onclick="resetGame()">
+Reset Save
+</button>
+
+</section>
 
 
 <script>
 
-let game = JSON.parse(localStorage.getItem("dieselLifeSave")) || {
+const DEFAULT_GAME = {
 
-  money: 25000,
+money:25000,
 
-  hp: 325,
-  torque: 650,
+owned:[
+"stockWheels",
+"stockTires",
+"stockPaint",
+"stockSuspension",
+"stockTurbo",
+"stockEngine",
+"stockExhaust"
+],
 
-  owned: ["stockWheels","stockPaint","stockSuspension","stockTurbo","stockEngine","stockExhaust"],
+installed:{
 
-  installed: {
-    wheels: "stockWheels",
-    paint: "stockPaint",
-    suspension: "stockSuspension",
-    turbo: "stockTurbo",
-    engine: "stockEngine",
-    exhaust: "stockExhaust"
-  }
+wheels:"stockWheels",
+tires:"stockTires",
+paint:"stockPaint",
+suspension:"stockSuspension",
+turbo:"stockTurbo",
+engine:"stockEngine",
+exhaust:"stockExhaust"
+
+}
 
 };
+
+let saved =
+JSON.parse(
+localStorage.getItem("dieselLifeSave")
+);
+
+let game = saved || DEFAULT_GAME;
+
+
+/* make older V2 saves compatible */
+
+if(!game.installed.tires){
+
+game.installed.tires =
+"stockTires";
+
+}
+
+if(!game.owned.includes("stockTires")){
+
+game.owned.push(
+"stockTires"
+);
+
+}
 
 
 const categories = {
 
-wheels: [
+wheels:[
 
 {
 id:"stockWheels",
-name:"Factory Wheels",
+name:"Factory 18-inch Wheels",
 price:0,
-description:"Stock factory wheels."
+rim:39,
+description:"Factory heavy-duty aluminum wheels."
 },
 
 {
 id:"chromeWheels",
-name:"20-inch Chrome Wheels",
-price:1800,
-description:"Polished street/show wheels."
+name:"20x10 Polished Wheels",
+price:1900,
+rim:43,
+description:"Bright polished street and show setup."
 },
 
 {
 id:"blackWheels",
-name:"22-inch Black Forged Wheels",
-price:3200,
-description:"Aggressive forged wheel setup."
+name:"22x12 Forged Black Wheels",
+price:3400,
+rim:47,
+description:"Wide forged wheels with an aggressive stance."
 },
 
 {
 id:"deepWheels",
-name:"24-inch Deep Dish Wheels",
-price:5200,
-description:"Big show-truck wheel setup."
+name:"24x14 Deep Dish Wheels",
+price:5600,
+rim:51,
+description:"Large deep-dish show truck setup."
 }
 
 ],
 
+tires:[
 
-paint: [
+{
+id:"stockTires",
+name:"Factory 33-inch Tires",
+price:0,
+radius:72,
+description:"Factory all-terrain tires."
+},
+
+{
+id:"tire35",
+name:"35-inch All Terrains",
+price:1400,
+radius:77,
+description:"Larger daily-driver all-terrain tires."
+},
+
+{
+id:"tire37",
+name:"37-inch Mud Terrains",
+price:2200,
+radius:83,
+description:"Aggressive 37-inch mud terrain setup."
+},
+
+{
+id:"tire40",
+name:"40-inch Mud Terrains",
+price:3400,
+radius:90,
+description:"Massive tires built for large lift kits."
+}
+
+],
+
+paint:[
 
 {
 id:"stockPaint",
-name:"Factory Gray",
+name:"Magnetic Gray",
 price:0,
-color:"#737373",
-description:"Original factory paint."
+color:"#3b3b3b",
+description:"Factory dark gray."
 },
 
 {
 id:"blackPaint",
-name:"Gloss Black",
-price:1200,
-color:"#111111",
-description:"Full gloss black paint."
-},
-
-{
-id:"redPaint",
-name:"Deep Red",
+name:"Obsidian Black",
 price:1400,
-color:"#7a1515",
-description:"Dark metallic-style red."
-},
-
-{
-id:"bluePaint",
-name:"Midnight Blue",
-price:1400,
-color:"#142a55",
-description:"Deep blue finish."
+color:"#101010",
+description:"Deep gloss black."
 },
 
 {
 id:"whitePaint",
 name:"Pearl White",
 price:1800,
-color:"#e8e8e8",
-description:"Clean pearl-white show finish."
+color:"#ececec",
+description:"Bright pearl-white finish."
+},
+
+{
+id:"bluePaint",
+name:"Midnight Blue",
+price:1700,
+color:"#112c55",
+description:"Dark metallic blue."
+},
+
+{
+id:"redPaint",
+name:"Ruby Red",
+price:1700,
+color:"#721919",
+description:"Deep metallic red."
+},
+
+{
+id:"tanPaint",
+name:"Desert Tan",
+price:1800,
+color:"#9b8967",
+description:"Heavy-duty desert tan."
 }
 
 ],
 
-
-suspension: [
+suspension:[
 
 {
 id:"stockSuspension",
-name:"Stock Suspension",
+name:"Factory Suspension",
 price:0,
 height:0,
-description:"Factory ride height."
+description:"Stock heavy-duty ride height."
 },
 
 {
 id:"levelKit",
-name:"2.5-inch Leveling Kit",
-price:900,
-height:6,
-description:"Levels the front and gives the truck a stronger stance."
+name:"2.5-inch Level",
+price:950,
+height:7,
+description:"Raises the front for a level stance."
+},
+
+{
+id:"lift4",
+name:"4-inch Suspension Lift",
+price:2100,
+height:14,
+description:"Moderate lifted street setup."
 },
 
 {
 id:"lift6",
-name:"6-inch Lift Kit",
-price:2800,
-height:18,
-description:"Six-inch suspension lift."
+name:"6-inch Suspension Lift",
+price:3200,
+height:23,
+description:"Classic lifted diesel stance."
+},
+
+{
+id:"lift8",
+name:"8-inch Suspension Lift",
+price:4500,
+height:33,
+description:"Large suspension lift."
 },
 
 {
 id:"lift10",
 name:"10-inch Show Lift",
-price:5200,
-height:34,
-description:"Massive lifted show-truck stance."
+price:6200,
+height:44,
+description:"Extreme show-truck stance."
 }
 
 ],
 
-
-turbo: [
+turbo:[
 
 {
 id:"stockTurbo",
-name:"Factory Turbo",
+name:"Factory VGT Turbo",
 price:0,
 hp:0,
 torque:0,
-description:"Factory turbocharger."
+description:"Factory variable-geometry turbocharger."
 },
 
 {
 id:"s363",
-name:"S363 Turbo",
-price:2200,
+name:"S363 Single Turbo",
+price:2400,
 hp:85,
-torque:130,
-description:"+85 HP • Fast-spooling street turbo."
+torque:125,
+description:"+85 HP • Responsive street setup."
 },
 
 {
 id:"s366",
-name:"S366 Turbo",
-price:3200,
-hp:145,
+name:"S366 Single Turbo",
+price:3400,
+hp:150,
 torque:210,
-description:"+145 HP • Strong street/strip setup."
+description:"+150 HP • Strong street/strip turbo."
+},
+
+{
+id:"s369",
+name:"S369 Single Turbo",
+price:4300,
+hp:205,
+torque:280,
+description:"+205 HP • Larger performance setup."
 },
 
 {
 id:"s400",
-name:"S400 Turbo",
-price:5200,
-hp:260,
-torque:340,
-description:"+260 HP • Large competition-style turbo."
+name:"S400 Competition Turbo",
+price:5800,
+hp:285,
+torque:375,
+description:"+285 HP • Big competition-oriented turbo."
 }
 
 ],
 
-
-engine: [
+engine:[
 
 {
 id:"stockEngine",
-name:"Stock Fuel System",
+name:"Factory Fueling",
 price:0,
 hp:0,
 torque:0,
-description:"Factory engine fueling."
+description:"Factory fuel system and calibration."
 },
 
 {
@@ -806,31 +1346,39 @@ name:"Performance Tune",
 price:900,
 hp:75,
 torque:130,
-description:"+75 HP • ECU calibration."
+description:"+75 HP • Performance calibration."
 },
 
 {
 id:"injectors",
 name:"Performance Injectors",
-price:2800,
-hp:140,
+price:2900,
+hp:150,
 torque:220,
-description:"+140 HP • High-flow injectors."
+description:"+150 HP • Larger injectors."
 },
 
 {
-id:"builtFuel",
-name:"Competition Fuel System",
-price:6200,
-hp:250,
-torque:360,
-description:"+250 HP • Full competition fueling."
+id:"fuelSystem",
+name:"High-Flow Fuel System",
+price:4700,
+hp:210,
+torque:300,
+description:"+210 HP • Pumps, injectors and supporting fuel system."
+},
+
+{
+id:"competitionFuel",
+name:"Competition Fueling",
+price:6800,
+hp:300,
+torque:430,
+description:"+300 HP • Built for serious power."
 }
 
 ],
 
-
-exhaust: [
+exhaust:[
 
 {
 id:"stockExhaust",
@@ -845,23 +1393,39 @@ id:"exhaust4",
 name:"4-inch Exhaust",
 price:850,
 hp:15,
-description:"+15 HP • Better exhaust flow."
+description:"+15 HP • Improved flow."
 },
 
 {
 id:"exhaust5",
 name:"5-inch Exhaust",
-price:1250,
+price:1300,
 hp:25,
 description:"+25 HP • Large diesel exhaust."
 },
 
 {
+id:"bedStack",
+name:"Single Bed Stack",
+price:1800,
+hp:30,
+description:"+30 HP • Vertical stack behind the cab."
+},
+
+{
+id:"dualStacks",
+name:"Dual Bed Stacks",
+price:2600,
+hp:35,
+description:"+35 HP • Twin vertical stacks."
+},
+
+{
 id:"hoodStack",
 name:"Hood Stack",
-price:1800,
-hp:35,
-description:"+35 HP • Competition-style hood stack."
+price:2200,
+hp:40,
+description:"+40 HP • Competition-style hood exit."
 }
 
 ]
@@ -869,10 +1433,11 @@ description:"+35 HP • Competition-style hood stack."
 };
 
 
-let currentCategory = "wheels";
+let currentCategory =
+"wheels";
 
 
-function saveGame() {
+function save(){
 
 localStorage.setItem(
 "dieselLifeSave",
@@ -882,34 +1447,26 @@ JSON.stringify(game)
 }
 
 
-function moneyFormat(number) {
+function findItem(category,id){
 
-return number.toLocaleString();
-
-}
-
-
-function updateUI() {
-
-document.getElementById("money").innerText =
-moneyFormat(game.money);
-
-calculateStats();
-updateTruck();
+return categories[category]
+.find(x=>x.id===id);
 
 }
 
 
-function calculateStats() {
+function calculateStats(){
 
-let hp = 325;
-let torque = 650;
+let hp=325;
+let torque=650;
 
-["turbo","engine","exhaust"].forEach(category => {
+["turbo","engine","exhaust"]
+.forEach(category=>{
 
-let item =
-categories[category].find(
-x => x.id === game.installed[category]
+const item =
+findItem(
+category,
+game.installed[category]
 );
 
 if(item){
@@ -921,420 +1478,743 @@ torque += item.torque || 0;
 
 });
 
-game.hp = hp;
-game.torque = torque;
-
-document.getElementById("hp").innerText = hp;
-document.getElementById("torque").innerText = torque;
+game.hp=hp;
+game.torque=torque;
 
 let quarter =
-16.2 - ((hp - 325) / 150);
+16.2 -
+((hp-325)/145);
 
-quarter = Math.max(8.5,quarter);
-
-document.getElementById("quarter").innerText =
-quarter.toFixed(1) + "s";
-
-}
-
-
-function showCategory(category,button) {
-
-currentCategory = category;
-
-document.querySelectorAll(".category").forEach(
-b => b.classList.remove("active")
+quarter =
+Math.max(
+8.2,
+quarter
 );
 
-button.classList.add("active");
+document
+.getElementById("hp")
+.textContent=hp;
 
-renderParts();
+document
+.getElementById("torque")
+.textContent=torque;
+
+document
+.getElementById("quarter")
+.textContent=
+quarter.toFixed(1)+"s";
 
 }
 
 
-function renderParts() {
+function updateMoney(){
 
-let container =
-document.getElementById("parts");
+document
+.getElementById("money")
+.textContent=
+game.money.toLocaleString();
 
-container.innerHTML = "";
+}
 
-categories[currentCategory].forEach(item => {
 
-let owned =
-game.owned.includes(item.id);
+function updateTruck(){
 
-let installed =
-game.installed[currentCategory] === item.id;
+/* PAINT */
 
-let card =
-document.createElement("div");
+const paint =
+findItem(
+"paint",
+game.installed.paint
+);
 
-card.className = "part";
+document
+.querySelectorAll(".body-color")
+.forEach(element=>{
 
-card.innerHTML = `
+element.style.fill=
+paint.color;
 
-<div class="part-top">
+});
 
-<div class="part-name">
-${item.name}
-</div>
 
-<div class="part-price">
-${item.price === 0 ? "FREE" : "$"+moneyFormat(item.price)}
-</div>
+/* SUSPENSION */
 
-</div>
+const suspension =
+findItem(
+"suspension",
+game.installed.suspension
+);
 
-<div class="part-description">
-${item.description}
-</div>
+document
+.getElementById("truckWrap")
+.style.bottom =
+(50+suspension.height)+"px";
 
-<button
-class="${installed ? "owned" : ""}"
-onclick="buyPart('${currentCategory}','${item.id}')">
 
-${installed
-? "✓ INSTALLED"
-: owned
-? "INSTALL"
-: "BUY"}
+/* TIRES */
 
-</button>
+const tires =
+findItem(
+"tires",
+game.installed.tires
+);
+
+document
+.getElementById("frontTire")
+.setAttribute(
+"r",
+tires.radius
+);
+
+document
+.getElementById("rearTire")
+.setAttribute(
+"r",
+tires.radius
+);
+
+
+/* WHEELS */
+
+const wheels =
+findItem(
+"wheels",
+game.installed.wheels
+);
+
+["frontRim","rearRim"]
+.forEach(id=>{
+
+document
+.getElementById(id)
+.setAttribute(
+"r",
+wheels.rim
+);
+
+});
+
+
+let rimFill="#888";
+let rimStroke="#ddd";
+
+if(
+game.installed.wheels===
+"blackWheels"
+){
+
+rimFill="#151515";
+rimStroke="#555";
+
+}
+
+if(
+game.installed.wheels===
+"chromeWheels"
+){
+
+rimFill="#bbb";
+rimStroke="#f5f5f5";
+
+}
+
+if(
+game.installed.wheels===
+"deepWheels"
+){
+
+rimFill="#999";
+rimStroke="#ffffff";
+
+}
+
+["frontRim","rearRim"]
+.forEach(id=>{
+
+document
+.getElementById(id)
+.style.fill=rimFill;
+
+document
+.getElementById(id)
+.style.stroke=rimStroke;
+
+});
+
+
+/* EXHAUST */
+
+updateExhaust();
+
+updateBuildSheet();
+
+}
+
+
+function updateExhaust(){
+
+const group =
+document
+.getElementById("exhaustGroup");
+
+const type =
+game.installed.exhaust;
+
+if(type==="bedStack"){
+
+group.innerHTML=`
+
+<rect
+class="exhaust"
+x="305"
+y="75"
+width="14"
+height="170"
+rx="4"
+/>
+
+<path
+class="exhaust"
+d="
+M305 78
+Q310 57 330 56
+L330 70
+Q318 70 319 84
+Z"
+/>
 
 `;
 
-container.appendChild(card);
+}
+
+else if(type==="dualStacks"){
+
+group.innerHTML=`
+
+<rect
+class="exhaust"
+x="278"
+y="78"
+width="13"
+height="167"
+rx="4"
+/>
+
+<rect
+class="exhaust"
+x="306"
+y="78"
+width="13"
+height="167"
+rx="4"
+/>
+
+<path
+class="exhaust"
+d="
+M278 80
+Q280 60 298 58
+L298 70
+Q289 71 291 84
+Z"
+/>
+
+<path
+class="exhaust"
+d="
+M306 80
+Q308 60 326 58
+L326 70
+Q317 71 319 84
+Z"
+/>
+
+`;
+
+}
+
+else if(type==="hoodStack"){
+
+group.innerHTML=`
+
+<rect
+class="exhaust"
+x="682"
+y="90"
+width="15"
+height="155"
+rx="4"
+/>
+
+<path
+class="exhaust"
+d="
+M682 92
+Q685 72 703 70
+L703 82
+Q694 83 697 96
+Z"
+/>
+
+`;
+
+}
+
+else{
+
+group.innerHTML=`
+
+<rect
+class="exhaust"
+x="90"
+y="235"
+width="85"
+height="10"
+rx="4"
+/>
+
+`;
+
+}
+
+}
+
+
+function updateBuildSheet(){
+
+const fields={
+
+Wheels:"wheels",
+Tires:"tires",
+Suspension:"suspension",
+Turbo:"turbo",
+Engine:"engine",
+Exhaust:"exhaust"
+
+};
+
+Object.keys(fields)
+.forEach(field=>{
+
+const category=
+fields[field];
+
+const item=
+findItem(
+category,
+game.installed[category]
+);
+
+document
+.getElementById(
+"build"+field
+)
+.textContent=
+item.name;
 
 });
 
 }
 
 
-function buyPart(category,id) {
+function renderParts(){
 
-let item =
-categories[category].find(
-x => x.id === id
-);
+const container=
+document.getElementById("parts");
 
-if(game.installed[category] === id)
-return;
+container.innerHTML="";
 
+categories[currentCategory]
+.forEach(item=>{
 
-if(game.owned.includes(id)) {
+const owned=
+game.owned.includes(item.id);
 
-game.installed[category] = id;
+const installed=
+game.installed[currentCategory]===
+item.id;
 
-saveGame();
-updateUI();
-renderParts();
+const part=
+document.createElement("div");
 
-return;
+part.className="part";
+
+part.innerHTML=`
+
+<div class="part-head">
+
+<div class="part-name">
+${item.name}
+</div>
+
+<div class="part-price">
+${
+item.price===0
+?
+"FREE"
+:
+"$"+item.price.toLocaleString()
+}
+</div>
+
+</div>
+
+<div class="part-desc">
+${item.description}
+</div>
+
+<button
+class="${installed?"installed":""}"
+onclick="
+buyPart(
+'${currentCategory}',
+'${item.id}'
+)
+">
+
+${
+installed
+?
+"✓ INSTALLED"
+:
+owned
+?
+"INSTALL"
+:
+"BUY"
+}
+
+</button>
+
+`;
+
+container.appendChild(part);
+
+});
 
 }
 
 
-if(game.money < item.price) {
+function selectCategory(category,button){
 
-alert("You don't have enough cash.");
+currentCategory=category;
 
-return;
-
-}
-
-
-game.money -= item.price;
-
-game.owned.push(id);
-
-game.installed[category] = id;
-
-saveGame();
-
-updateUI();
-renderParts();
-
-}
-
-
-function updateTruck() {
-
-let paint =
-categories.paint.find(
-x => x.id === game.installed.paint
-);
-
-document.getElementById("truckBody").style.background =
-paint.color;
-
-document.getElementById("cab").style.background =
-paint.color;
-
-
-let suspension =
-categories.suspension.find(
-x => x.id === game.installed.suspension
-);
-
-document.getElementById("truck").style.bottom =
-(65 + suspension.height) + "px";
-
-
-let wheel =
-game.installed.wheels;
-
-let rimStyle;
-
-if(wheel === "stockWheels") {
-
-rimStyle =
-"radial-gradient(circle,#222 0 17%,#888 18% 37%,#444 38% 53%,#888 54% 66%,#333 67%)";
-
-}
-
-if(wheel === "chromeWheels") {
-
-rimStyle =
-"radial-gradient(circle,#222 0 10%,#eee 11% 25%,#777 26% 35%,#eee 36% 60%,#333 61%)";
-
-}
-
-if(wheel === "blackWheels") {
-
-rimStyle =
-"radial-gradient(circle,#111 0 15%,#444 16% 26%,#080808 27% 66%,#333 67%)";
-
-}
-
-if(wheel === "deepWheels") {
-
-rimStyle =
-"radial-gradient(circle,#111 0 10%,#ddd 11% 20%,#555 21% 44%,#eee 45% 67%,#222 68%)";
-
-}
-
-document.getElementById("frontRim").style.background =
-rimStyle;
-
-document.getElementById("rearRim").style.background =
-rimStyle;
-
-
-let exhaust =
-game.installed.exhaust;
-
-let exhaustEl =
-document.getElementById("exhaust");
-
-if(exhaust === "hoodStack") {
-
-exhaustEl.style.left = "215px";
-exhaustEl.style.bottom = "96px";
-exhaustEl.style.width = "11px";
-exhaustEl.style.height = "60px";
-
-}
-
-else {
-
-exhaustEl.style.left = "25px";
-exhaustEl.style.bottom = "39px";
-exhaustEl.style.width = "42px";
-exhaustEl.style.height = "8px";
-
-}
-
-}
-
-
-function showScreen(id,button) {
-
-document.querySelectorAll(".screen").forEach(
-s => s.classList.remove("active")
-);
-
-document.getElementById(id).classList.add("active");
-
-document.querySelectorAll(".nav").forEach(
-b => b.classList.remove("active")
+document
+.querySelectorAll(".category")
+.forEach(button=>
+button.classList.remove("active")
 );
 
 button.classList.add("active");
 
-window.scrollTo(0,0);
+renderParts();
 
 }
 
 
-function race(opponentHP,entry,payout) {
+function buyPart(category,id){
 
-if(game.money < entry) {
+if(
+game.installed[category]===id
+){
 
-alert("You don't have enough money for the entry fee.");
 return;
 
 }
 
-game.money -= entry;
+const item=
+findItem(category,id);
 
-let playerPower =
-game.hp +
-(Math.random()*180);
+if(game.owned.includes(id)){
 
-let opponentPower =
-opponentHP +
-(Math.random()*150);
+game.installed[category]=id;
 
-let result =
-document.getElementById("raceResult");
+save();
+updateAll();
+renderParts();
 
-result.style.display = "block";
-
-
-if(playerPower > opponentPower) {
-
-game.money += payout;
-
-result.style.background = "#1d4d1b";
-
-result.innerHTML =
-"🏆 YOU WON!<br><br>You earned $" +
-moneyFormat(payout);
+return;
 
 }
 
-else {
+if(game.money<item.price){
 
-result.style.background = "#551b1b";
+alert(
+"You don't have enough cash."
+);
 
-result.innerHTML =
-"❌ YOU LOST<br><br>Upgrade your truck and come back stronger.";
+return;
 
 }
 
-saveGame();
-updateUI();
+game.money-=item.price;
+
+game.owned.push(id);
+
+game.installed[category]=id;
+
+save();
+
+updateAll();
+renderParts();
 
 }
 
 
-function truckPull() {
+function dragRace(
+opponentHP,
+entry,
+payout
+){
 
-let entry = 750;
+if(game.money<entry){
 
-if(game.money < entry){
+alert(
+"Not enough money for the entry fee."
+);
+
+return;
+
+}
+
+game.money-=entry;
+
+const tireBonus=
+game.installed.tires==="tire37"
+?25
+:
+game.installed.tires==="tire35"
+?15
+:
+0;
+
+const player=
+game.hp+
+tireBonus+
+Math.random()*160;
+
+const opponent=
+opponentHP+
+Math.random()*150;
+
+const result=
+document.getElementById(
+"raceResult"
+);
+
+result.style.display="block";
+
+if(player>opponent){
+
+game.money+=payout;
+
+result.style.background=
+"#194b18";
+
+result.innerHTML=
+"🏆 YOU WON<br><br>$"+
+payout.toLocaleString()+
+" added to your cash.";
+
+}
+
+else{
+
+result.style.background=
+"#551818";
+
+result.innerHTML=
+"❌ YOU LOST<br><br>More power and traction could help.";
+
+}
+
+save();
+updateAll();
+
+}
+
+
+function truckPull(){
+
+const entry=750;
+
+if(game.money<entry){
 
 alert("Not enough cash.");
 return;
 
 }
 
-game.money -= entry;
+game.money-=entry;
 
-let score =
-game.torque + Math.random()*300;
+let tireBonus=0;
 
-let result =
-document.getElementById("pullResult");
+if(
+game.installed.tires===
+"tire37"
+){
 
-result.style.display = "block";
-
-if(score > 950){
-
-game.money += 2500;
-
-result.style.background = "#1d4d1b";
-
-result.innerHTML =
-"🏆 FULL PULL!<br><br>You won $2,500.";
+tireBonus=100;
 
 }
 
-else {
+if(
+game.installed.tires===
+"tire40"
+){
 
-result.style.background = "#551b1b";
-
-result.innerHTML =
-"🚜 You didn't make the full pull.<br><br>Add more torque and try again.";
-
-}
-
-saveGame();
-updateUI();
+tireBonus=150;
 
 }
 
+const score=
+game.torque+
+tireBonus+
+Math.random()*250;
 
-function truckShow() {
+const result=
+document.getElementById(
+"pullResult"
+);
 
-let entry = 300;
+result.style.display=
+"block";
 
-if(game.money < entry){
+if(score>1050){
+
+game.money+=2500;
+
+result.style.background=
+"#194b18";
+
+result.innerHTML=
+"🚜🏆 FULL PULL!<br><br>You won $2,500.";
+
+}
+
+else{
+
+result.style.background=
+"#551818";
+
+result.innerHTML=
+"🚜 The sled stopped you short.<br><br>More torque and tire could help.";
+
+}
+
+save();
+updateAll();
+
+}
+
+
+function truckShow(){
+
+const entry=300;
+
+if(game.money<entry){
 
 alert("Not enough cash.");
 return;
 
 }
 
-game.money -= entry;
+game.money-=entry;
 
-let modifications =
-game.owned.length - 6;
+const mods=
+game.owned.length-7;
 
-let score =
-modifications * 15 +
+const score=
+mods*13+
 Math.random()*60;
 
-let result =
-document.getElementById("showResult");
+const result=
+document.getElementById(
+"showResult"
+);
 
-result.style.display = "block";
+result.style.display=
+"block";
 
+if(score>95){
 
-if(score > 90){
+game.money+=2200;
 
-game.money += 2000;
+result.style.background=
+"#194b18";
 
-result.style.background = "#1d4d1b";
-
-result.innerHTML =
-"🏆 BEST IN SHOW!<br><br>You won $2,000.";
-
-}
-
-else if(score > 55){
-
-game.money += 700;
-
-result.style.background = "#554a1b";
-
-result.innerHTML =
-"🥈 You placed in the show.<br><br>You won $700.";
+result.innerHTML=
+"🏆 BEST IN SHOW<br><br>You won $2,200.";
 
 }
 
-else {
+else if(score>60){
 
-result.style.background = "#551b1b";
+game.money+=800;
 
-result.innerHTML =
-"Your truck didn't place.<br><br>More visual modifications will increase your show score.";
+result.style.background=
+"#554918";
 
-}
-
-saveGame();
-updateUI();
+result.innerHTML=
+"🥈 YOU PLACED<br><br>You won $800.";
 
 }
 
+else{
 
-function resetGame() {
+result.style.background=
+"#551818";
 
-if(confirm("Reset Diesel Life and start over?")){
+result.innerHTML=
+"Your truck didn't place.<br><br>Keep building it.";
 
-localStorage.removeItem("dieselLifeSave");
+}
+
+save();
+updateAll();
+
+}
+
+
+function showScreen(id,button){
+
+document
+.querySelectorAll(".screen")
+.forEach(screen=>
+screen.classList.remove("active")
+);
+
+document
+.getElementById(id)
+.classList.add("active");
+
+document
+.querySelectorAll(".nav")
+.forEach(button=>
+button.classList.remove("active")
+);
+
+button.classList.add("active");
+
+window.scrollTo(
+0,
+0
+);
+
+}
+
+
+function resetGame(){
+
+if(
+confirm(
+"Delete your Diesel Life save and start over?"
+)
+){
+
+localStorage.removeItem(
+"dieselLifeSave"
+);
 
 location.reload();
 
@@ -1343,8 +2223,16 @@ location.reload();
 }
 
 
+function updateAll(){
+
+calculateStats();
+updateMoney();
+updateTruck();
+
+}
+
 renderParts();
-updateUI();
+updateAll();
 
 </script>
 
