@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Diesel Life V7</title>
+  <title>Diesel Life V7.1</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -53,7 +53,6 @@
             </div>
 
             <div class="build-name">STREET / SHOW BUILD</div>
-
             <div class="parts-strip" id="partsStrip"></div>
           </section>
 
@@ -81,38 +80,75 @@
         <div class="race-shell">
           <div class="race-top">
             <div>
-              <div class="race-title">1/4 MILE STREET DRAG</div>
-              <div class="race-sub">Touch controls work on iPhone. Keyboard: W / ↑ throttle, Shift gear, N nitrous.</div>
+              <div class="race-title">1/4 MILE SIDE-VIEW DRAG</div>
+              <div class="race-sub">Your built truck races left to right. Hold THROTTLE, tap SHIFT, hold NITROUS.</div>
             </div>
             <button id="startRaceBtn" class="primary race-start">START RACE</button>
           </div>
 
-          <div class="track-wrap">
-            <canvas id="raceCanvas"></canvas>
+          <div class="race-scene" id="raceScene">
+            <div class="sky-strip"></div>
+            <div class="light-tree">
+              <div class="tree-bulb pre" id="pre1"></div>
+              <div class="tree-bulb pre" id="pre2"></div>
+              <div class="tree-bulb amber" id="amber1"></div>
+              <div class="tree-bulb amber" id="amber2"></div>
+              <div class="tree-bulb amber" id="amber3"></div>
+              <div class="tree-bulb green" id="greenBulb"></div>
+              <div class="tree-bulb red" id="redBulb"></div>
+            </div>
+
             <div class="countdown" id="countdown"></div>
+            <div class="finish-line"></div>
+
+            <div class="lane lane-top">
+              <div class="lane-label">YOU</div>
+              <div class="road-stripe"></div>
+              <div class="race-truck player" id="playerTruck">
+                <div class="race-glow" id="playerGlow"></div>
+                <img src="assets/truck.png" alt="Player truck" class="race-truck-img" />
+                <div class="race-paint" id="playerPaint"></div>
+                <div class="race-wheel front" id="raceFrontWheel"></div>
+                <div class="race-wheel rear" id="raceRearWheel"></div>
+                <div class="nitrous-flame left"></div>
+                <div class="nitrous-flame right"></div>
+                <div class="smoke-cloud"></div>
+              </div>
+            </div>
+
+            <div class="lane lane-bottom">
+              <div class="lane-label">RIVAL</div>
+              <div class="road-stripe"></div>
+              <div class="race-truck rival" id="opponentTruck">
+                <div class="race-glow rival-glow"></div>
+                <img src="assets/truck.png" alt="Opponent truck" class="race-truck-img rival-img" />
+                <div class="race-paint rival-paint"></div>
+                <div class="race-wheel front"></div>
+                <div class="race-wheel rear"></div>
+                <div class="smoke-cloud rival-smoke"></div>
+              </div>
+            </div>
           </div>
 
+          <div class="progress-wrap">
+            <div class="progress-card">
+              <span>YOU</span>
+              <div class="progress-bar"><div class="progress-fill" id="playerProgress"></div></div>
+            </div>
+            <div class="progress-card">
+              <span>RIVAL</span>
+              <div class="progress-bar"><div class="progress-fill rival-fill" id="opponentProgress"></div></div>
+            </div>
+          </div>
+
+          <div class="lead-box" id="leadBox">READY TO RACE</div>
+
           <div class="race-hud">
-            <div class="gauge-card">
-              <span>SPEED</span>
-              <strong><span id="speed">0</span> MPH</strong>
-            </div>
-            <div class="gauge-card">
-              <span>RPM</span>
-              <strong id="rpm">900</strong>
-            </div>
-            <div class="gauge-card">
-              <span>GEAR</span>
-              <strong id="gear">1</strong>
-            </div>
-            <div class="gauge-card">
-              <span>DISTANCE</span>
-              <strong><span id="distance">0</span> FT</strong>
-            </div>
-            <div class="gauge-card">
-              <span>NITROUS</span>
-              <strong><span id="nitrous">100</span>%</strong>
-            </div>
+            <div class="gauge-card"><span>SPEED</span><strong><span id="speed">0</span> MPH</strong></div>
+            <div class="gauge-card"><span>RPM</span><strong id="rpm">900</strong></div>
+            <div class="gauge-card"><span>GEAR</span><strong id="gear">1</strong></div>
+            <div class="gauge-card"><span>DISTANCE</span><strong><span id="distance">0</span> FT</strong></div>
+            <div class="gauge-card"><span>NITROUS</span><strong><span id="nitrous">100</span>%</strong></div>
           </div>
 
           <div class="mobile-controls">
@@ -125,20 +161,9 @@
         </div>
       </section>
 
-      <section id="pull" class="screen placeholder">
-        <h2>TRUCK PULL</h2>
-        <p>V8 target: sled-pull physics, dirt traction, gearing, heat, prize events.</p>
-      </section>
-
-      <section id="show" class="screen placeholder">
-        <h2>TRUCK SHOWS</h2>
-        <p>V8 target: judged stance, paint, wheels, lighting and rarity for prize money.</p>
-      </section>
-
-      <section id="map" class="screen placeholder">
-        <h2>OPEN MAP</h2>
-        <p>V8 target: garage, drag strip, truck pull, show grounds, diesel shop and events.</p>
-      </section>
+      <section id="pull" class="screen placeholder"><h2>TRUCK PULL</h2><p>Next build target: sled-pull events with weight transfer, traction, and payouts.</p></section>
+      <section id="show" class="screen placeholder"><h2>TRUCK SHOWS</h2><p>Next build target: judged stance, paint, wheels, lighting and rarity for prize money.</p></section>
+      <section id="map" class="screen placeholder"><h2>OPEN MAP</h2><p>Next build target: garage, drag strip, truck pull, show grounds, diesel shop and events.</p></section>
     </main>
   </div>
 
