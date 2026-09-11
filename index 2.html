@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Diesel Life V7</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">DL</div>
+        <div>
+          <div class="brand-title">DIESEL LIFE</div>
+          <div class="brand-sub">BUILD • RACE • SHOW</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-btn active" data-screen="garage">GARAGE</button>
+        <button class="nav-btn" data-screen="race">RACE</button>
+        <button class="nav-btn" data-screen="pull">PULL</button>
+        <button class="nav-btn" data-screen="show">SHOW</button>
+        <button class="nav-btn" data-screen="map">MAP</button>
+      </nav>
+
+      <div class="money">$<span id="money">12500</span></div>
+    </header>
+
+    <main>
+      <section id="garage" class="screen active">
+        <div class="garage-grid">
+          <aside class="left-panel panel">
+            <div class="panel-title">BUILD</div>
+            <button class="category active" data-cat="wheels">WHEELS</button>
+            <button class="category" data-cat="tires">TIRES</button>
+            <button class="category" data-cat="lift">SUSPENSION</button>
+            <button class="category" data-cat="paint">PAINT</button>
+            <button class="category" data-cat="lights">LIGHTS</button>
+            <button class="category" data-cat="bumper">BUMPERS</button>
+            <button class="category" data-cat="performance">PERFORMANCE</button>
+          </aside>
+
+          <section class="truck-stage">
+            <div class="garage-lights"></div>
+            <div class="truck-wrap" id="truckWrap">
+              <img id="truckImage" src="assets/truck.png" alt="Diesel truck" />
+              <div id="paintTint"></div>
+              <div class="wheel front" id="frontWheel"></div>
+              <div class="wheel rear" id="rearWheel"></div>
+              <div class="underglow" id="underglow"></div>
+            </div>
+
+            <div class="build-name">STREET / SHOW BUILD</div>
+
+            <div class="parts-strip" id="partsStrip"></div>
+          </section>
+
+          <aside class="right-panel panel">
+            <div class="panel-title">BUILD STATS</div>
+            <div class="stat"><span>POWER</span><strong id="powerStat">425 HP</strong></div>
+            <div class="stat"><span>TORQUE</span><strong id="torqueStat">890 LB-FT</strong></div>
+            <div class="stat"><span>WEIGHT</span><strong id="weightStat">7,150 LB</strong></div>
+            <div class="stat"><span>GRIP</span><strong id="gripStat">62%</strong></div>
+            <div class="stat"><span>STYLE</span><strong id="styleStat">48</strong></div>
+
+            <div class="divider"></div>
+
+            <div class="panel-title small">SELECTED</div>
+            <div id="selectedPart" class="selected-part">Factory Wheel</div>
+            <div id="selectedPrice" class="selected-price">OWNED</div>
+
+            <button id="buyBtn" class="primary">INSTALL</button>
+            <button id="saveBtn" class="secondary">SAVE BUILD</button>
+          </aside>
+        </div>
+      </section>
+
+      <section id="race" class="screen">
+        <div class="race-shell">
+          <div class="race-top">
+            <div>
+              <div class="race-title">1/4 MILE STREET DRAG</div>
+              <div class="race-sub">Touch controls work on iPhone. Keyboard: W / ↑ throttle, Shift gear, N nitrous.</div>
+            </div>
+            <button id="startRaceBtn" class="primary race-start">START RACE</button>
+          </div>
+
+          <div class="track-wrap">
+            <canvas id="raceCanvas"></canvas>
+            <div class="countdown" id="countdown"></div>
+          </div>
+
+          <div class="race-hud">
+            <div class="gauge-card">
+              <span>SPEED</span>
+              <strong><span id="speed">0</span> MPH</strong>
+            </div>
+            <div class="gauge-card">
+              <span>RPM</span>
+              <strong id="rpm">900</strong>
+            </div>
+            <div class="gauge-card">
+              <span>GEAR</span>
+              <strong id="gear">1</strong>
+            </div>
+            <div class="gauge-card">
+              <span>DISTANCE</span>
+              <strong><span id="distance">0</span> FT</strong>
+            </div>
+            <div class="gauge-card">
+              <span>NITROUS</span>
+              <strong><span id="nitrous">100</span>%</strong>
+            </div>
+          </div>
+
+          <div class="mobile-controls">
+            <button id="throttleBtn" class="control throttle">THROTTLE</button>
+            <button id="shiftBtn" class="control shift">SHIFT</button>
+            <button id="nitrousBtn" class="control nitrous">NITROUS</button>
+          </div>
+
+          <div id="raceResult" class="race-result hidden"></div>
+        </div>
+      </section>
+
+      <section id="pull" class="screen placeholder">
+        <h2>TRUCK PULL</h2>
+        <p>V8 target: sled-pull physics, dirt traction, gearing, heat, prize events.</p>
+      </section>
+
+      <section id="show" class="screen placeholder">
+        <h2>TRUCK SHOWS</h2>
+        <p>V8 target: judged stance, paint, wheels, lighting and rarity for prize money.</p>
+      </section>
+
+      <section id="map" class="screen placeholder">
+        <h2>OPEN MAP</h2>
+        <p>V8 target: garage, drag strip, truck pull, show grounds, diesel shop and events.</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
